@@ -80,11 +80,12 @@ export class GosoftComponent {
   //hero = 'Wonder Women';
   heroes = HEROES;
   hero: Hero = new Hero(1, 'WonderMan');
-  selectedHero: Hero = new Hero(1, 'WonderMan');
+  selectedHero: Hero;
 
   doSomething(hero: Hero): void {
     console.log("Clicked!!: "+hero.id+"  "+hero.name);
     this.selectedHero = hero;
+    this.title = hero.name;
   }
 }
 
