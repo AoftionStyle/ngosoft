@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { Hero } from './hero';
+import { HeroService } from './hero.service';
+import { OnInit } from '@angular/core';
 
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
+
+// const HEROES: Hero[] = [
+//   { id: 11, name: 'Mr. Nice' },
+//   { id: 12, name: 'Narco' },
+//   { id: 13, name: 'Bombasto' },
+//   { id: 14, name: 'Celeritas' },
+//   { id: 15, name: 'Magneta' },
+//   { id: 16, name: 'RubberMan' },
+//   { id: 17, name: 'Dynama' },
+//   { id: 18, name: 'Dr IQ' },
+//   { id: 19, name: 'Magma' },
+//   { id: 20, name: 'Tornado' }
+// ];
 
 
 
@@ -21,6 +24,7 @@ const HEROES: Hero[] = [
     //template : '<h1>{{title}}</h1><h1>{{hero}}</h1>'
     //template : '<h1> {{hero.id}} {{hero.title}}</h1>'
     templateUrl : './gosoft.component.html',
+    providers: [HeroService],
     //template : '<h1> {{hero[0]}} </h1>'
     styles: [`
   .selected {
@@ -75,17 +79,31 @@ const HEROES: Hero[] = [
     
     
 })
-export class GosoftComponent {
+export class GosoftComponent implements OnInit {
   title = 'gosoft works!!!!!!!!';
   //hero = 'Wonder Women';
-  heroes = HEROES;
+  heroes;
   hero: Hero = new Hero(1, 'WonderMan');
   selectedHero: Hero;
+
 
   doSomething(hero: Hero): void {
     console.log("Clicked!!: "+hero.id+"  "+hero.name);
     this.selectedHero = hero;
     this.title = hero.name;
+  }
+
+  constructor(private heroService: HeroService) { }
+
+  // getHeroes(): void {
+  //   this.heroes = this.heroService.getHeroes();
+  // }
+  getHeroes(): void {
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+
+  ngOnInit(): void {
+    this.getHeroes();
   }
 }
 
