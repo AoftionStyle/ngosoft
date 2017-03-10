@@ -5,15 +5,7 @@ import { Hero } from './hero';
     selector: 'app-gosoft',
     //template : '<h1>{{title}}</h1><h1>{{hero}}</h1>'
     //template : '<h1> {{hero.id}} {{hero.title}}</h1>'
-    template : `
-      <h1>{{title}}</h1>
-      <h2>{{hero.name}} details!</h2>
-      <div><label>id: </label>{{hero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input value="{{hero.name}}" placeholder="name">
-      </div>
-    `
+    templateUrl : './gosoft.component.html'
 })
 export class GosoftComponent {
   title = 'gosoft works!!!!!!!!';
